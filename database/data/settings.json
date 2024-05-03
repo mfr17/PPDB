@@ -1,0 +1,8 @@
+[
+    {"type":"options", "setting_access_group":"public","setting_default_value":"Ditutup","setting_description":"Status Penerimaan Peserta Didik Baru","setting_group":"admission","setting_value":"Ditutup","setting_variable":"admission_status"},
+    {"type":"int","setting_access_group":"public","setting_default_value":"2023","setting_description":"Tahun Penerimaan Peserta Didik Baru","setting_group":"admission","setting_value":"2023","setting_variable":"admission_year"},
+    {"type":"date","setting_access_group":"public","setting_default_value":"01-01-2023","setting_description":"Tanggal Mulai PPDB","setting_group":"admission","setting_value":"01-01-2023","setting_variable":"admission_start_date"},
+    {"type":"date","setting_access_group":"public","setting_default_value":"01-12-2023","setting_description":"Tanggal Selesai PPDB","setting_group":"admission","setting_value":"01-12-2023","setting_variable":"admission_end_date"},
+    {"type":"date","setting_access_group":"public","setting_default_value":"01-01-2023","setting_description":"Tanggal Mulai Pengumuman Hasil Seleksi PPDB","setting_group":"admission","setting_value":"01-01-2023","setting_variable":"announcement_start_date"},
+    {"type":"date","setting_access_group":"public","setting_default_value":"01-12-2023","setting_description":"Tanggal Selesai Pengumuman Hasil Seleksi PPDB","setting_group":"admission","setting_value":"01-12-2023","setting_variable":"announcement_end_date"}
+]

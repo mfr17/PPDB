@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Students extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'nama',
+        'jenis_kelamin',
+        'nik',
+        'nis',
+        'nisn',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'agama_id',
+        'kebutuhan_khusus_id',
+        'alamat',
+        'desa',
+        'kecamatan',
+        'kota_kabupaten',
+        'kode_pos',
+        'tempat_tinggal_id',
+        'moda_transportasi_id',
+        'no_hp',
+        'email',
+        'sktm',
+        'kip',
+        'kewarganegaraan',
+
+        'ayah_tanggal_lahir',
+        'ayah_pendidikan_id',
+        'ayah_pekerjaan_id',
+        'ayah_penghasilan_id',
+
+        'ibu_tanggal_lahir',
+        'ibu_pendidikan_id',
+        'ibu_pekerjaan_id',
+        'ibu_penghasilan_id',
+
+        'wali_tanggal_lahir',
+        'wali_pendidikan_id',
+        'wali_pekerjaan_id',
+        'wali_penghasilan_id',
+
+        'tinggi_badan',
+        'berat_badan',
+        'jarak_tempat_tinggal',
+        'waktu_tempuh_sekolah',
+        'jumlah_saudara_kandung',
+
+        'jenis_pendaftaran',
+        'jalur_pendaftaran_id',
+        'no_pendaftaran',
+        'hasil_seleksi_pmb',
+        'jurusan',
+        'registrasi_ulang',
+        'no_ijazah',
+        'asal_sekolah',
+        'alamat_asal_sekolah',
+        'hobi',
+        'cita_cita',
+    ];
+}
