@@ -9,6 +9,17 @@ class Students extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'jenis_pendaftaran',
+        'jalur_pendaftaran_id',
+        'no_pendaftaran',
+        'hasil_seleksi_pmb',
+        'jurusan',
+        'registrasi_ulang',
+        'no_ijazah',
+        'asal_sekolah',
+        'alamat_asal_sekolah',
+        'hobi',
+        'cita_cita',
         'nama',
         'jenis_kelamin',
         'nik',
@@ -30,38 +41,26 @@ class Students extends Model
         'sktm',
         'kip',
         'kewarganegaraan',
-
+        'nama_ayah',
         'ayah_tanggal_lahir',
         'ayah_pendidikan_id',
         'ayah_pekerjaan_id',
         'ayah_penghasilan_id',
-
+        'nama_ibu',
         'ibu_tanggal_lahir',
         'ibu_pendidikan_id',
         'ibu_pekerjaan_id',
         'ibu_penghasilan_id',
-
+        'nama_wali',
         'wali_tanggal_lahir',
         'wali_pendidikan_id',
         'wali_pekerjaan_id',
         'wali_penghasilan_id',
-
         'tinggi_badan',
         'berat_badan',
         'jarak_tempat_tinggal',
         'waktu_tempuh_sekolah',
         'jumlah_saudara_kandung',
 
-        'jenis_pendaftaran',
-        'jalur_pendaftaran_id',
-        'no_pendaftaran',
-        'hasil_seleksi_pmb',
-        'jurusan',
-        'registrasi_ulang',
-        'no_ijazah',
-        'asal_sekolah',
-        'alamat_asal_sekolah',
-        'hobi',
-        'cita_cita',
     ];
 }
