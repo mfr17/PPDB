@@ -17,8 +17,9 @@ return new class extends Migration
             $table->bigInteger('jalur_pendaftaran_id')->comment('Jalur pendaftaran (Umum/Prestasi)');
             $table->bigInteger('no_pendaftaran')->comment('Nomor Pendaftaran');
             $table->string('hasil_seleksi_pmb')->nullable()->comment('Hasil seleksi PMB');
-            $table->bigInteger('jurusan_id')->comment('Jurusan Siswa');
-            $table->enum('registrasi_ulang', ['true', 'false'])->comment('Konfirmasi pendaftaran ulang');
+            $table->bigInteger('jurusan_satu_id')->comment('Jurusan 1 Siswa');
+            $table->bigInteger('jurusan_dua_id')->comment('Jurusan 2 Siswa');
+            $table->enum('registrasi_ulang', ['true', 'false'])->nullable()->comment('Konfirmasi pendaftaran ulang');
             $table->bigInteger('no_ijazah')->nullable()->comment('Nomor Ijazah sebelumnya');
             $table->string('asal_sekolah')->nullable()->comment('Asal sekolah');
             $table->string('alamat_asal_sekolah')->nullable()->comment('Alamat sekolah');
@@ -41,7 +42,7 @@ return new class extends Migration
             $table->string('kota_kabupaten')->comment('Nama kota/kabupaten tempat tinggal');
             $table->bigInteger('kode_pos')->limit(5)->comment('Kode pos tempat tinggal');
             $table->bigInteger('tempat_tinggal_id')->comment('Jenis tempat tinggal');
-            $table->bigInteger('moda_transportasi_id')->nullable()->comment('Moda transportasi yang digunakan');
+            $table->bigInteger('moda_transportasi_id')->comment('Moda transportasi yang digunakan');
             $table->bigInteger('no_hp')->comment('Nomor HP/WA siswa');
             $table->string('email')->nullable()->comment('Email pribadi siswa');
             $table->bigInteger('sktm')->nullable()->comment('Nomor Surat Keterangan Tidak Mampu');
@@ -49,20 +50,23 @@ return new class extends Migration
             $table->enum('kewarganegaraan', ['WNI', 'WNA'])->comment('Kewarganegaraan siswa');
             // Data Ayah Kandung
             $table->string('nama_ayah')->comment('Nama Ayah');
-            $table->date('ayah_tanggal_lahir')->comment('Tanggal lahir ayah');
-            $table->bigInteger('ayah_pendidikan_id')->comment('Pendidikan terakhir ayah');
-            $table->bigInteger('ayah_pekerjaan_id')->comment('Pekerjaan ayah');
-            $table->bigInteger('ayah_penghasilan_id')->comment('Rentang penghasilan ayah');
+            $table->date('ayah_tanggal_lahir')->nullable()->comment('Tanggal lahir ayah');
+            $table->string('alamat_ayah')->nullable()->comment('Alamat Ayah');
+            $table->bigInteger('ayah_pendidikan_id')->nullable()->comment('Pendidikan terakhir ayah');
+            $table->bigInteger('ayah_pekerjaan_id')->nullable()->comment('Pekerjaan ayah');
+            $table->bigInteger('ayah_penghasilan_id')->nullable()->comment('Rentang penghasilan ayah');
             // Data Ibu Kandung
             $table->string('nama_ibu')->comment('Nama Ibu');
-            $table->date('ibu_tanggal_lahir')->comment('Tanggal lahir ibu');
-            $table->bigInteger('ibu_pendidikan_id')->comment('Pendidikan terakhir ibu');
-            $table->bigInteger('ibu_pekerjaan_id')->comment('Pekerjaan ibu');
-            $table->bigInteger('ibu_penghasilan_id')->comment('Rentang penghasilan ibu');
+            $table->string('alamat_ibu')->nullable()->comment('Alamat Ibu');
+            $table->date('ibu_tanggal_lahir')->nullable()->comment('Tanggal lahir ibu');
+            $table->bigInteger('ibu_pendidikan_id')->nullable()->comment('Pendidikan terakhir ibu');
+            $table->bigInteger('ibu_pekerjaan_id')->nullable()->comment('Pekerjaan ibu');
+            $table->bigInteger('ibu_penghasilan_id')->nullable()->comment('Rentang penghasilan ibu');
             // Data Wali
 
 
             $table->string('nama_wali')->nullable()->comment('Nama Wali');
+            $table->string('alamat_wali')->nullable()->comment('Alamat Wali');
             $table->date('wali_tanggal_lahir')->nullable()->comment('Tanggal lahir wali');
             $table->bigInteger('wali_pendidikan_id')->nullable()->comment('Pendidikan terakhir wali');
             $table->bigInteger('wali_pekerjaan_id')->nullable()->comment('Pekerjaan wali');

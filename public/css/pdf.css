@@ -1,0 +1,61 @@
+/* Reset default margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styles */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 4rem;
+}
+
+/* Logo styles */
+.logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.5rem;
+}
+
+/* Text styles */
+.text {
+    text-align: center;
+    margin: 0; /* Reset margin to remove spacing */
+    padding: 0; /* Reset padding to remove spacing */
+    line-height: 1; /* Adjust line height for tighter spacing */
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0.5rem; /* Optional margin bottom for spacing between elements */
+}
+
+.subtitle {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 0.5rem; /* Optional margin bottom for spacing between elements */
+}
+
+.address, .contact {
+    font-size: 16px;
+    margin-bottom: 0.5rem; /* Optional margin bottom for spacing between elements */
+}
+
+.email, .website {
+    color: #0066cc;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .text {
+        text-align: left;
+    }
+}

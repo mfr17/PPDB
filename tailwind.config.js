@@ -6,6 +6,9 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
+    fontFamily: {
+      'serif': ['ui-serif']
+    },
     extend: {},
   },
   plugins: [],

@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Students;
-use App\Models\Temp;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class StudentAddmissionController extends Controller
 {
+    public function pdf()
+    {
+
+        $pdf = Pdf::loadView('surat.kop')->setPaper('a4', 'portrait');
+        return $pdf->stream();
+    }
     public function create()
     {
 
         $jalur = DB::table('options')->where('option_group', 'admission_types')->pluck('option_name', 'id');
+        $jurusan = DB::table('options')->where('option_group', 'school_major')->pluck('option_name', 'id');
         $agama = DB::table('options')->where('option_group', 'religions')->pluck('option_name', 'id');
         $kebutuhan = DB::table('options')->where('option_group', 'special_needs')->pluck('option_name', 'id');
         $pendidikan = DB::table('options')->where('option_group', 'educations')->pluck('option_name', 'id');
@@ -24,6 +31,7 @@ class StudentAddmissionController extends Controller
 
         $options = [
             'jalur' => $jalur,
+            'jurusan' => $jurusan,
             'agama' => $agama,
             'kebutuhan' => $kebutuhan,
             'pendidikan' => $pendidikan,
@@ -32,7 +40,7 @@ class StudentAddmissionController extends Controller
             'tempat_tinggal' => $tempat_tinggal,
             'transpotasi' => $transportasi,
         ];
-        return view('test', $options);
+        return view('ppdb.daftar', $options);
     }
 
     public function store(Request $request)
@@ -41,10 +49,11 @@ class StudentAddmissionController extends Controller
         $validatedData = $request->validate([
             'jenis_pendaftaran' => ['required'],
             'jalur_pendaftaran_id' => ['required', 'numeric'],
+            'jurusan_id' => ['required', 'numeric'],
             'hobi' => ['required', 'string', 'max:255'],
-            'cita_cita' => ['required', 'string', 'max:255'],
-            'asal_sekolah' => ['required', 'string', 'max:255'],
-            'alamat_asal_sekolah' => ['required', 'string', 'max:255'],
+            'cita_cita' => ['nullable', 'string', 'max:255'],
+            'asal_sekolah' => ['nullable', 'string', 'max:255'],
+            'alamat_asal_sekolah' => ['nullable', 'string', 'max:255'],
             'nama' => ['required', 'string', 'max:255'],
             'jenis_kelamin' => ['required', 'in:M,F'],
             'nik' => ['required', 'numeric', 'unique:students'],
@@ -69,12 +78,12 @@ class StudentAddmissionController extends Controller
             'kewarganegaraan' => ['required'],
             'nama_ayah' => ['required', 'string', 'max:255'],
             'nik_ayah' => ['required', 'numeric',],
-            'ayah_tanggal_lahir' => ['required', 'date'],
+            'ayah_tanggal_lahir' => ['nullable', 'date'],
             'ayah_pendidikan_id' => ['required', 'numeric'],
             'ayah_pekerjaan_id' => ['required', 'numeric'],
             'ayah_penghasilan_id' => ['required', 'numeric'],
             'nama_ibu' => ['required', 'string', 'max:255'],
-            'nik_ibu' => ['required', 'numeric',],
+            'nik_ibu' => ['nullable', 'numeric',],
             'ibu_tanggal_lahir' => ['required', 'date'],
             'ibu_pendidikan_id' => ['required', 'numeric'],
             'ibu_pekerjaan_id' => ['required', 'numeric'],

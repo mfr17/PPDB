@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Daftar PPDB</title>
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{ asset('build/assets/app-B3zpz1CS.css') }}">
+    {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body class="bg-gray-100 p-2">
@@ -14,19 +15,37 @@
         <form action="{{ route('students.store') }}" method="POST">
             @csrf
             <div class="mb-4">
-                <p class="text-lg font-bold mb-4">Registrati Peserta Didik</p>
+                <p class="text-lg font-bold mb-4">Registrati Peserta Didik <span class="text-red-700">*</span></p>
 
                 <div class="flex items-center mb-4">
-                    <label for="jenis_pendaftaran" class="w-2/4 pr-2">Jenis Pendaftaran</label>
-                    <select name="jenis_pendaftaran" id="jenis_pendaftaran" class="w-2/3 p-2 border ">
+                    <label for="jenis_pendaftaran" class="w-2/4 pr-2">Jenis Pendaftaran <span
+                            class="text-red-700">*</span></label>
+                    <select name="jenis_pendaftaran" id="jenis_pendaftaran" class="w-2/3 p-2 border " required>
                         <option value="true">Baru</option>
                         <option value="false">Pindahan</option>
                     </select>
                 </div>
                 <div class="flex items-center mb-4">
-                    <label for="jalur_pendaftaran" class="w-2/4 pr-2">Jalur Pendaftaran</label>
-                    <select name="jalur_pendaftaran_id" id="jalur_pendaftaran" class="w-2/3 p-2 border ">
+                    <label for="jalur_pendaftaran" class="w-2/4 pr-2">Jalur Pendaftaran <span
+                            class="text-red-700">*</span></label>
+                    <select name="jalur_pendaftaran_id" id="jalur_pendaftaran" class="w-2/3 p-2 border " required>
                         @foreach ($jalur as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flex items-center mb-4">
+                    <label for="jurusan_1" class="w-2/4 pr-2">Jurusan Pertama<span class="text-red-700">*</span></label>
+                    <select name="jurusan_satu_id" id="jurusan_1" class="w-2/3 p-2 border " required>
+                        @foreach ($jurusan as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flex items-center mb-4">
+                    <label for="jurusan_2" class="w-2/4 pr-2">Jurusan Kedua<span class="text-red-700">*</span></label>
+                    <select name="jurusan_dua_id" id="jurusan_2" class="w-2/3 p-2 border " required>
+                        @foreach ($jurusan as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
@@ -63,19 +82,22 @@
             </div>
             <div class="flex items-center mb-4">
                 <label for="nik" class="w-2/4 pr-2">NIK <span class="text-red-700">*</span></label>
-                <input type="text" name="nik" id="nik" class="w-2/3 p-2 border " required>
+                <input type="text" name="nik" id="nik" class="w-2/3 p-2 border " maxlength="16" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="no_kk" class="w-2/4 pr-2">Nomor KK <span class="text-red-700">*</span></label>
-                <input type="text" name="no_kk" id="no_kk" class="w-2/3 p-2 border " required>
+                <input type="text" name="no_kk" id="no_kk" class="w-2/3 p-2 border " maxlength="16"
+                    required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="nis" class="w-2/4 pr-2">NIS <span class="text-red-700">*</span></label>
-                <input type="text" name="nis" id="nis" class="w-2/3 p-2 border " required>
+                <input type="text" name="nis" id="nis" class="w-2/3 p-2 border " maxlength="10"
+                    required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="nisn" class="w-2/4 pr-2">NISN <span class="text-red-700">*</span></label>
-                <input type="text" name="nisn" id="nisn" class="w-2/3 p-2 border " required>
+                <input type="text" name="nisn" id="nisn" class="w-2/3 p-2 border " maxlength="10"
+                    required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="agama" class="w-2/4 pr-2">Agama</label>
@@ -86,8 +108,9 @@
                 </select>
             </div>
             <div class="flex items-center mb-4">
-                <label for="transpotasi" class="w-2/4 pr-2">Kebutuhan Khusus</label>
-                <select name="kebutuhan_khusus_id" id="kebutuhan_khusus" class="w-2/3 p-2 border ">
+                <label for="transpotasi" class="w-2/4 pr-2">Kebutuhan Khusus <span
+                        class="text-red-700">*</span></label>
+                <select name="kebutuhan_khusus_id" id="kebutuhan_khusus" class="w-2/3 p-2 border " required>
                     @foreach ($kebutuhan as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
@@ -106,23 +129,25 @@
                 <input type="text" name="alamat" id="alamat" class="w-2/3 p-2 border " required>
             </div>
             <div class="flex items-center mb-4">
-                <label for="desa" class="w-2/4 pr-2">Desa</label>
-                <input type="text" name="desa" id="desa" class="w-2/3 p-2 border ">
+                <label for="desa" class="w-2/4 pr-2">Desa <span class="text-red-700">*</span></label>
+                <input type="text" name="desa" id="desa" class="w-2/3 p-2 border " required>
             </div>
             <div class="flex items-center mb-4">
-                <label for="kecamatan" class="w-2/4 pr-2">Kecamatan</label>
-                <input type="text" name="kecamatan" id="kecamatan" class="w-2/3 p-2 border ">
+                <label for="kecamatan" class="w-2/4 pr-2">Kecamatan <span class="text-red-700">*</span></label>
+                <input type="text" name="kecamatan" id="kecamatan" class="w-2/3 p-2 border " required>
             </div>
             <div class="flex items-center mb-4">
-                <label for="alamat" class="w-2/4 pr-2">Kota/Kabupaten</label>
-                <input type="text" name="kota_kabupaten" id="kota_kabupaten" class="w-2/3 p-2 border ">
+                <label for="alamat" class="w-2/4 pr-2">Kota/Kabupaten <span class="text-red-700">*</span></label>
+                <input type="text" name="kota_kabupaten" id="kota_kabupaten" class="w-2/3 p-2 border " required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="kode_pos" class="w-2/4 pr-2">Kode Pos <span class="text-red-700">*</span></label>
-                <input type="text" name="kode_pos" id="kode_pos" class="w-2/3 p-2 border " required>
+                <input type="text" name="kode_pos" id="kode_pos" class="w-2/3 p-2 border " maxlength="5"
+                    required>
             </div>
             <div class="flex items-center mb-4">
-                <label for="tempat_tinggal" class="w-2/4 pr-2">Tinggal Bersama</label>
+                <label for="tempat_tinggal" class="w-2/4 pr-2">Tinggal Bersama <span
+                        class="text-red-700">*</span></label>
                 <select name="tempat_tinggal_id" id="tempat_tinggal" class="w-2/3 p-2 border " required>
                     @foreach ($tempat_tinggal as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
@@ -130,7 +155,8 @@
                 </select>
             </div>
             <div class="flex items-center mb-4">
-                <label for="transpotasi" class="w-2/4 pr-2">Moda Transpotasi</label>
+                <label for="transpotasi" class="w-2/4 pr-2">Moda Transpotasi <span
+                        class="text-red-700">*</span></label>
                 <select name="moda_transpotasi_id" id="transpotasi" class="w-2/3 p-2 border " required>
                     @foreach ($transpotasi as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
@@ -138,12 +164,13 @@
                 </select>
             </div>
             <div class="flex items-center mb-4">
-                <label for="no_hp" class="w-2/4 pr-2">Nomor HP</label>
-                <input type="tel" name="no_hp" id="no_hp" class="w-2/3 p-2 border ">
+                <label for="no_hp" class="w-2/4 pr-2">Nomor HP <span class="text-red-700">*</span></label>
+                <input type="tel" name="no_hp" id="no_hp" class="w-2/3 p-2 border " maxlength="13"
+                    required>
             </div>
             <div class="flex items-center mb-4">
-                <label for="email" class="w-2/4 pr-2">Email</label>
-                <input type="email" name="email" id="email" class="w-2/3 p-2 border ">
+                <label for="email" class="w-2/4 pr-2">Email <span class="text-red-700">*</span></label>
+                <input type="email" name="email" id="email" class="w-2/3 p-2 border " required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="sktm" class="w-2/4 pr-2">SKTM (Jika Ada)</label>
@@ -154,8 +181,9 @@
                 <input type="kip" name="kip" id="kip" class="w-2/3 p-2 border ">
             </div>
             <div class="flex items-center mb-4">
-                <label for="kewarganegaraan" class="w-2/4 pr-2">Kewarganegaraan</label>
-                <select name="kewarganegaraan" id="kewarganegaraan" class="w-2/3 p-2 border ">
+                <label for="kewarganegaraan" class="w-2/4 pr-2">Kewarganegaraan <span
+                        class="text-red-700">*</span></label>
+                <select name="kewarganegaraan" id="kewarganegaraan" class="w-2/3 p-2 border " required>
                     <option value="WNI">WNI</option>
                     <option value="WNA">WNA</option>
                 </select>
@@ -167,8 +195,12 @@
                 <input type="text" name="nama_ayah" id="nama_ayah" class="w-2/3 p-2 border " required>
             </div>
             <div class="flex items-center mb-4">
-                <label for="nik_ayah" class="w-2/4 pr-2">NIK <span class="text-red-700">*</span></label>
-                <input type="text" name="nik_ayah" id="nik_ayah" class="w-2/3 p-2 border " required>
+                <label for="nik_ayah" class="w-2/4 pr-2">NIK </label>
+                <input type="text" name="nik_ayah" id="nik_ayah" class="w-2/3 p-2 border " maxlength="16">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="alamat_ayah" class="w-2/4 pr-2">Alamat Ayah</label>
+                <input type="text" name="alamat_ayah" id="alamat_ayah" class="w-2/3 p-2 border " required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="ayah_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
@@ -204,8 +236,12 @@
                 <input type="text" name="nama_ibu" id="nama_ibu" class="w-2/3 p-2 border " required>
             </div>
             <div class="flex items-center mb-4">
-                <label for="nik_ibu" class="w-2/4 pr-2">NIK <span class="text-red-700">*</span></label>
-                <input type="text" name="nik_ibu" id="nik_ibu" class="w-2/3 p-2 border " required>
+                <label for="nik_ibu" class="w-2/4 pr-2">NIK</label>
+                <input type="text" name="nik_ibu" id="nik_ibu" class="w-2/3 p-2 border " maxlength="16">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="alamat_ibu" class="w-2/4 pr-2">Alamat Ibu</label>
+                <input type="text" name="alamat_ibu" id="alamat_ibu" class="w-2/3 p-2 border ">
             </div>
             <div class="flex items-center mb-4">
                 <label for="ibu_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
@@ -244,7 +280,11 @@
             </div>
             <div class="flex items-center mb-4">
                 <label for="nik_wali" class="w-2/4 pr-2">NIK</label>
-                <input type="text" name="nik_wali" id="nik_wali" class="w-2/3 p-2 border ">
+                <input type="text" name="nik_wali" id="nik_wali" class="w-2/3 p-2 border " maxlength="16">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="alamat_wali" class="w-2/4 pr-2">Alamat Wali</label>
+                <input type="text" name="alamat_wali" id="alamat_wali" class="w-2/3 p-2 border ">
             </div>
             <div class="flex items-center mb-4">
                 <label for="wali_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
@@ -280,28 +320,33 @@
             </div>
             <p class="text-lg font-bold mb-4">Data Periodik</p>
             <div class="flex items-center mb-4">
-                <label for="tinggi_badan" class="w-2/4 pr-2">Tinggi Badan</label>
-                <input type="number" name="tinggi_badan" id="tinggi_badan" class="w-2/3 p-2 border ">
+                <label for="tinggi_badan" class="w-2/4 pr-2">Tinggi Badan (Cm)</label>
+                <input type="number" name="tinggi_badan" id="tinggi_badan" class="w-2/3 p-2 border "
+                    maxlength="3">
             </div>
             <div class="flex items-center mb-4">
-                <label for="berat_badan" class="w-2/4 pr-2">Beran Badan</label>
-                <input type="number" name="berat_badan" id="berat_badan" class="w-2/3 p-2 border ">
+                <label for="berat_badan" class="w-2/4 pr-2">Beran Badan (Kg)</label>
+                <input type="number" name="berat_badan" id="berat_badan" class="w-2/3 p-2 border " maxlength="3">
             </div>
             <div class="flex items-center mb-4">
-                <label for="lingkar_kepala" class="w-2/4 pr-2">Lingkar Kepala</label>
-                <input type="number" name="lingkar_kepala" id="lingkar_kepala" class="w-2/3 p-2 border ">
+                <label for="lingkar_kepala" class="w-2/4 pr-2">Lingkar Kepala (Cm)</label>
+                <input type="number" name="lingkar_kepala" id="lingkar_kepala" class="w-2/3 p-2 border "
+                    maxlength="2">
             </div>
             <div class="flex items-center mb-4">
-                <label for="jarak" class="w-2/4 pr-2">Jarak Tempat Tinggal</label>
-                <input type="number" name="jarak_tempat_tinggal" id="jarak" class="w-2/3 p-2 border ">
+                <label for="jarak" class="w-2/4 pr-2">Jarak Tempat Tinggal (Km)</label>
+                <input type="number" name="jarak_tempat_tinggal" id="jarak" class="w-2/3 p-2 border "
+                    maxlength="3">
             </div>
             <div class="flex items-center mb-4">
-                <label for="waktu" class="w-2/4 pr-2">Waktu Tempuh Ke-sekolah</label>
-                <input type="number" name="waktu_tempuh_sekolah" id="waktu" class="w-2/3 p-2 border ">
+                <label for="waktu" class="w-2/4 pr-2">Waktu Tempuh Ke-sekolah (Menit)</label>
+                <input type="number" name="waktu_tempuh_sekolah" id="waktu" class="w-2/3 p-2 border "
+                    maxlength="3">
             </div>
             <div class="flex items-center mb-4">
                 <label for="saudara" class="w-2/4 pr-2">Jumlah Saudara Kandung</label>
-                <input type="number" name="jumlah_saudara_kandung" id="saudara" class="w-2/3 p-2 border ">
+                <input type="number" name="jumlah_saudara_kandung" id="saudara" class="w-2/3 p-2 border "
+                    maxlength="2">
             </div>
             <p class="text-lg font-bold mb-4">Pertanyaan Keamanan</p>
             <div class="flex items-center mb-4">

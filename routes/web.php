@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('test');
-// });
+Route::get('/', function () {
+    return view('surat.kop');
+});
+
 
 Route::get('/create', [TempController::class, 'create'])->name('temp.create');
-Route::post('/temp', [TempController::class, 'store'])->name('temp.store');
 
+Route::get('/pdf', [StudentAddmissionController::class, 'pdf'])->name('students.pdf');
 Route::get('/daftar', [StudentAddmissionController::class, 'create'])->name('students.create');
 
 Route::post('/ppdb', [StudentAddmissionController::class, 'store'])->name('students.store');
