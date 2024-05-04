@@ -6,186 +6,321 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Daftar PPDB</title>
+    @vite('resources/css/app.css')
 </head>
 
-<body>
-    {{-- @dd($jalur) --}}
-    <form action="{{ route('students.store') }}" method="POST">
-        @csrf
-        <p>Registrati Peserta Didik</p>
-        <label for="jenis_pendaftaran">Jenis Pendaftaran</label>
-        <select name="jenis_pendaftaran" id="jenis_pendaftaran">
-            <option value="true">Baru</option>
-            <option value="false">Pindahan</option>
-        </select><br>
-        <label for="jalur_pendaftaran">Jalur Pendaftaran</label>
-        <select name="jalur_pendaftaran_id" id="jalur_pendaftaran">
-            @foreach ($jalur as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="asal_sekolah">Asal Sekolah</label>
-        <input type="text" name="asal_sekolah" id="asal_sekolah"><br>
-        <label for="alamat_asal_sekolah">Alamat Asal Sekolah</label>
-        <input type="text" name="alamat_asal_sekolah" id="alamat_asal_sekolah"><br>
-        <label for="hobi">Hobi</label>
-        <input type="text" name="hobi" id="hobi"><br>
-        <label for="cita_cita">Cita-Cita</label>
-        <input type="text" name="cita_cita" id="cita_cita"><br>
+<body class="bg-gray-100 p-2">
+    <div class="max-w-screen-2xl md:max-w-screen-xl sm:max-w-screen-sm mx-auto bg-white p-6  shadow-md">
+        <form action="{{ route('students.store') }}" method="POST">
+            @csrf
+            <div class="mb-4">
+                <p class="text-lg font-bold mb-4">Registrati Peserta Didik</p>
 
-        <p>Data Diri</p>
-        <label for="nama">Nama Lengkap</label>
-        <input type="text" name="nama" id="nama"><br>
-        <label for="jenis_kelamin">Jenis Kelamin</label>
-        <select name="jenis_kelamin" id="jenis_kelamin">
-            <option value="M">Laki-Laki</option>
-            <option value="F">Perempuan</option>
-        </select><br>
-        <label for="nik">NIK</label>
-        <input type="text" name="nik" id="nik"><br>
-        <label for="nis">NIS</label>
-        <input type="text" name="nis" id="nis"><br>
-        <label for="nisn">NISN</label>
-        <input type="text" name="nisn" id="nisn"><br>
-        <label for="agama">Agama</label>
-        <select name="agama_id" id="agama">
-            @foreach ($agama as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="transpotasi">Kebutuhan Khusus</label>
-        <select name="kebutuhan_khusus_id" id="kebutuhan_khusus">
-            @foreach ($kebutuhan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="tmpt_lahir">Tempat Lahir</label>
-        <input type="text" name="tempat_lahir" id="tmpt_lahir"><br>
-        <label for="tgl_lahir">Tanggal Lahir</label>
-        <input type="date" name="tanggal_lahir" id="tgl_lahir"><br>
-        <label for="alamat">Alamat</label>
-        <input type="text" name="alamat" id="alamat"><br>
-        <label for="desa">Desa</label>
-        <input type="text" name="desa" id="desa"><br>
-        <label for="kecamatan">Kecamatan</label>
-        <input type="text" name="kecamatan" id="kecamatan"><br>
-        <label for="alamat">Kota/Kabupaten</label>
-        <input type="text" name="kota_kabupaten" id="kota_kabupaten"><br>
-        <label for="kode_pos">Kode Pos</label>
-        <input type="text" name="kode_pos" id="kode_pos"><br>
-        <label for="tempat_tinggal">Tinggal Bersama</label>
-        <select name="tempat_tinggal_id" id="tempat_tinggal">
-            @foreach ($tempat_tinggal as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="transpotasi">Moda Transpotasi</label>
-        <select name="moda_transpotasi_id" id="transpotasi">
-            @foreach ($transpotasi as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="no_hp">Nomor HP</label>
-        <input type="tel" name="no_hp" id="no_hp"><br>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email"><br>
-        <label for="sktm">SKTM (Jika Ada)</label>
-        <input type="tel" name="sktm" id="sktm"><br>
-        <label for="kip">KIP (Jika Ada)</label>
-        <input type="kip" name="kip" id="kip"><br>
-        <label for="kewarganegaraan">Kewarganegaraan</label>
-        <select name="kewarganegaraan" id="kewarganegaraan">
-            <option value="WNI">WNI</option>
-            <option value="WNA">WNA</option>
-        </select>
-        <br>
-        <p>Data Orang Tua/Wali</p>
-        <label for="nama_ayah">Nama Ayah</label>
-        <input type="text" name="nama_ayah" id="nama_ayah"><br>
-        <label for="ayah_tanggal_lahir">Tanggal Lahir</label>
-        <input type="date" name="ayah_tanggal_lahir" id="ayah_tanggal_lahir"><br>
-        <label for="ayah_pendidikan">Pendidikan Terakhir</label>
-        <select name="ayah_pendidikan_id" id="ayah_pendidikan">
-            @foreach ($pendidikan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="ayah_pekerjaan">Pekerjaan</label>
-        <select name="ayah_pekerjaan_id" id="ayah_pekerjaan">
-            @foreach ($pekerjaan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="ayah_penghasilan">Penghasilan</label>
-        <select name="ayah_penghasilan_id" id="ayah_penghasilan">
-            <option value="" hidden selected>Pilih Penghasilan</option>
-            @foreach ($pendapatan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="nama_ibu">Nama Ibu</label>
-        <input type="text" name="nama_ibu" id="nama_ibu"><br>
-        <label for="ibu_tanggal_lahir">Tanggal Lahir</label>
-        <input type="date" name="ibu_tanggal_lahir" id="ibu_tanggal_lahir"><br>
-        <label for="ibu_pendidikan">Pendidikan Terakhir</label>
-        <select name="ibu_pendidikan_id" id="ibu_pendidikan">
-            @foreach ($pendidikan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="ibu_pekerjaan">Pekerjaan</label>
-        <select name="ibu_pekerjaan_id" id="ibu_pekerjaan">
-            @foreach ($pekerjaan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="ibu_penghasilan">Penghasilan</label>
-        <select name="ibu_penghasilan_id" id="ibu_penghasilan">
-            <option value="" hidden selected>Pilih Penghasilan</option>
-            @foreach ($pendapatan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <p>(Opsional)</p>
-        <label for="nama_wali">Nama Wali</label>
-        <input type="text" name="nama_wali" id="nama_wali"><br>
-        <label for="wali_tanggal_lahir">Tanggal Lahir</label>
-        <input type="date" name="wali_tanggal_lahir" id="wali_tanggal_lahir"><br>
-        <label for="wali_pendidikan">Pendidikan Terakhir</label>
-        <select name="wali_pendidikan_id" id="wali_pendidikan">
-            <option value="" hidden selected>Pilih Pendidikan</option>
-            @foreach ($pendidikan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="wali_pekerjaan">Pekerjaan</label>
-        <select name="wali_pekerjaan_id" id="wali_pekerjaan">
-            <option value="" hidden selected>Pilih Pekerjaan</option>
-            @foreach ($pekerjaan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
-        <label for="wali_penghasilan">Penghasilan</label>
-        <select name="wali_penghasilan_id" id="wali_penghasilan">
-            <option value="" hidden selected>Pilih Penghasilan</option>
-            @foreach ($pendapatan as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select><br>
+                <div class="flex items-center mb-4">
+                    <label for="jenis_pendaftaran" class="w-2/4 pr-2">Jenis Pendaftaran</label>
+                    <select name="jenis_pendaftaran" id="jenis_pendaftaran" class="w-2/3 p-2 border ">
+                        <option value="true">Baru</option>
+                        <option value="false">Pindahan</option>
+                    </select>
+                </div>
+                <div class="flex items-center mb-4">
+                    <label for="jalur_pendaftaran" class="w-2/4 pr-2">Jalur Pendaftaran</label>
+                    <select name="jalur_pendaftaran_id" id="jalur_pendaftaran" class="w-2/3 p-2 border ">
+                        @foreach ($jalur as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flex items-center mb-4">
+                    <label for="asal_sekolah" class="w-2/4 pr-2">Asal Sekolah</label>
+                    <input type="text" name="asal_sekolah" id="asal_sekolah" class="w-2/3 p-2 border ">
+                </div>
+                <div class="flex items-center mb-4">
+                    <label for="alamat_asal_sekolah" class="w-2/4 pr-2">Alamat Asal Sekolah</label>
+                    <input type="text" name="alamat_asal_sekolah" id="alamat_asal_sekolah" class="w-2/3 p-2 border ">
+                </div>
+                <div class="flex items-center mb-4">
+                    <label for="hobi" class="w-2/4 pr-2">Hobi</label>
+                    <input type="text" name="hobi" id="hobi" class="w-2/3 p-2 border ">
+                </div>
+                <div class="flex items-center mb-4">
+                    <label for="cita_cita" class="w-2/4 pr-2">Cita-Cita</label>
+                    <input type="text" name="cita_cita" id="cita_cita" class="w-2/3 p-2 border ">
+                </div>
+            </div>
 
-        <p>Data Periodik</p>
-        <label for="tinggi_badan">Tinggi Badan</label>
-        <input type="number" name="tinggi_badan" id="tinggi_badan"><br>
-        <label for="berat_badan">Beran Badan</label>
-        <input type="number" name="berat_badan" id="berat_badan"><br>
-        <label for="jarak">Jarak Tempat Tinggal</label>
-        <input type="number" name="jarak_tempat_tinggal" id="jarak"><br>
-        <label for="waktu">Waktu Tempuh Ke-sekolah</label>
-        <input type="number" name="waktu_tempuh_sekolah" id="waktu"><br>
-        <label for="saudara">Jumlah Saudara Kandung</label>
-        <input type="number" name="jumlah_saudara_kandung" id="saudara"><br>
-        <button type="submit">Submit</button>
-    </form>
+            <p class="text-lg font-bold mb-4">Data Diri</p>
+            <div class="flex items-center mb-4">
+                <label for="nama" class="w-2/4 pr-2">Nama Lengkap <span class="text-red-700">*</span></label>
+                <input type="text" name="nama" id="nama" class="w-2/3 p-2 border" required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="jenis_kelamin" class="w-2/4 pr-2">Jenis Kelamin</label>
+                <select name="jenis_kelamin" id="jenis_kelamin" class="w-2/3 p-2 border ">
+                    <option value="M">Laki-Laki</option>
+                    <option value="F">Perempuan</option>
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="nik" class="w-2/4 pr-2">NIK <span class="text-red-700">*</span></label>
+                <input type="text" name="nik" id="nik" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="no_kk" class="w-2/4 pr-2">Nomor KK <span class="text-red-700">*</span></label>
+                <input type="text" name="no_kk" id="no_kk" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="nis" class="w-2/4 pr-2">NIS <span class="text-red-700">*</span></label>
+                <input type="text" name="nis" id="nis" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="nisn" class="w-2/4 pr-2">NISN <span class="text-red-700">*</span></label>
+                <input type="text" name="nisn" id="nisn" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="agama" class="w-2/4 pr-2">Agama</label>
+                <select name="agama_id" id="agama" class="w-2/3 p-2 border ">
+                    @foreach ($agama as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="transpotasi" class="w-2/4 pr-2">Kebutuhan Khusus</label>
+                <select name="kebutuhan_khusus_id" id="kebutuhan_khusus" class="w-2/3 p-2 border ">
+                    @foreach ($kebutuhan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="tmpt_lahir" class="w-2/4 pr-2">Tempat Lahir <span class="text-red-700">*</span></label>
+                <input type="text" name="tempat_lahir" id="tmpt_lahir" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="tgl_lahir" class="w-2/4 pr-2">Tanggal Lahir <span class="text-red-700">*</span></label>
+                <input type="date" name="tanggal_lahir" id="tgl_lahir" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="alamat" class="w-2/4 pr-2">Alamat <span class="text-red-700">*</span></label>
+                <input type="text" name="alamat" id="alamat" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="desa" class="w-2/4 pr-2">Desa</label>
+                <input type="text" name="desa" id="desa" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="kecamatan" class="w-2/4 pr-2">Kecamatan</label>
+                <input type="text" name="kecamatan" id="kecamatan" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="alamat" class="w-2/4 pr-2">Kota/Kabupaten</label>
+                <input type="text" name="kota_kabupaten" id="kota_kabupaten" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="kode_pos" class="w-2/4 pr-2">Kode Pos <span class="text-red-700">*</span></label>
+                <input type="text" name="kode_pos" id="kode_pos" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="tempat_tinggal" class="w-2/4 pr-2">Tinggal Bersama</label>
+                <select name="tempat_tinggal_id" id="tempat_tinggal" class="w-2/3 p-2 border " required>
+                    @foreach ($tempat_tinggal as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="transpotasi" class="w-2/4 pr-2">Moda Transpotasi</label>
+                <select name="moda_transpotasi_id" id="transpotasi" class="w-2/3 p-2 border " required>
+                    @foreach ($transpotasi as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="no_hp" class="w-2/4 pr-2">Nomor HP</label>
+                <input type="tel" name="no_hp" id="no_hp" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="email" class="w-2/4 pr-2">Email</label>
+                <input type="email" name="email" id="email" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="sktm" class="w-2/4 pr-2">SKTM (Jika Ada)</label>
+                <input type="tel" name="sktm" id="sktm" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="kip" class="w-2/4 pr-2">KIP (Jika Ada)</label>
+                <input type="kip" name="kip" id="kip" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="kewarganegaraan" class="w-2/4 pr-2">Kewarganegaraan</label>
+                <select name="kewarganegaraan" id="kewarganegaraan" class="w-2/3 p-2 border ">
+                    <option value="WNI">WNI</option>
+                    <option value="WNA">WNA</option>
+                </select>
+            </div>
+
+            <p class="text-lg font-bold mb-4">Data Orang Tua/Wali</p>
+            <div class="flex items-center mb-4">
+                <label for="nama_ayah" class="w-2/4 pr-2">Nama Ayah <span class="text-red-700">*</span></label>
+                <input type="text" name="nama_ayah" id="nama_ayah" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="nik_ayah" class="w-2/4 pr-2">NIK <span class="text-red-700">*</span></label>
+                <input type="text" name="nik_ayah" id="nik_ayah" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="ayah_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
+                <input type="date" name="ayah_tanggal_lahir" id="ayah_tanggal_lahir" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="ayah_pendidikan" class="w-2/4 pr-2">Pendidikan Terakhir</label>
+                <select name="ayah_pendidikan_id" id="ayah_pendidikan" class="w-2/3 p-2 border ">
+                    @foreach ($pendidikan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="ayah_pekerjaan" class="w-2/4 pr-2">Pekerjaan</label>
+                <select name="ayah_pekerjaan_id" id="ayah_pekerjaan" class="w-2/3 p-2 border ">
+                    @foreach ($pekerjaan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="ayah_penghasilan" class="w-2/4 pr-2">Penghasilan</label>
+                <select name="ayah_penghasilan_id" id="ayah_penghasilan" class="w-2/3 p-2 border ">
+                    <option value="" hidden selected>Pilih Penghasilan</option>
+                    @foreach ($pendapatan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="nama_ibu" class="w-2/4 pr-2">Nama Ibu <span class="text-red-700">*</span></label>
+                <input type="text" name="nama_ibu" id="nama_ibu" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="nik_ibu" class="w-2/4 pr-2">NIK <span class="text-red-700">*</span></label>
+                <input type="text" name="nik_ibu" id="nik_ibu" class="w-2/3 p-2 border " required>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="ibu_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
+                <input type="date" name="ibu_tanggal_lahir" id="ibu_tanggal_lahir" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="ibu_pendidikan" class="w-2/4 pr-2">Pendidikan Terakhir</label>
+                <select name="ibu_pendidikan_id" id="ibu_pendidikan" class="w-2/3 p-2 border ">
+                    @foreach ($pendidikan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="ibu_pekerjaan" class="w-2/4 pr-2">Pekerjaan</label>
+                <select name="ibu_pekerjaan_id" id="ibu_pekerjaan" class="w-2/3 p-2 border ">
+                    @foreach ($pekerjaan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="ibu_penghasilan" class="w-2/4 pr-2">Penghasilan</label>
+                <select name="ibu_penghasilan_id" id="ibu_penghasilan" class="w-2/3 p-2 border ">
+                    <option value="" hidden selected>Pilih Penghasilan</option>
+                    @foreach ($pendapatan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <p class="text-lg font-bold mb-4">(Opsional)</p>
+
+            <div class="flex items-center mb-4">
+                <label for="nama_wali" class="w-2/4 pr-2">Nama Wali</label>
+                <input type="text" name="nama_wali" id="nama_wali" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="nik_wali" class="w-2/4 pr-2">NIK</label>
+                <input type="text" name="nik_wali" id="nik_wali" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="wali_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
+                <input type="date" name="wali_tanggal_lahir" id="wali_tanggal_lahir" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="wali_pendidikan" class="w-2/4 pr-2">Pendidikan Terakhir</label>
+                <select name="wali_pendidikan_id" id="wali_pendidikan" class="w-2/3 p-2 border ">
+                    <option value="" hidden selected>Pilih Pendidikan</option>
+                    @foreach ($pendidikan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="wali_pekerjaan" class="w-2/4 pr-2">Pekerjaan</label>
+                <select name="wali_pekerjaan_id" id="wali_pekerjaan" class="w-2/3 p-2 border ">
+                    <option value="" hidden selected>Pilih Pekerjaan</option>
+                    @foreach ($pekerjaan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="wali_penghasilan" class="w-2/4 pr-2">Penghasilan</label>
+                <select name="wali_penghasilan_id" id="wali_penghasilan" class="w-2/3 p-2 border ">
+                    <option value="" hidden selected>Pilih Penghasilan</option>
+                    @foreach ($pendapatan as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+
+            </div>
+            <p class="text-lg font-bold mb-4">Data Periodik</p>
+            <div class="flex items-center mb-4">
+                <label for="tinggi_badan" class="w-2/4 pr-2">Tinggi Badan</label>
+                <input type="number" name="tinggi_badan" id="tinggi_badan" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="berat_badan" class="w-2/4 pr-2">Beran Badan</label>
+                <input type="number" name="berat_badan" id="berat_badan" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="lingkar_kepala" class="w-2/4 pr-2">Lingkar Kepala</label>
+                <input type="number" name="lingkar_kepala" id="lingkar_kepala" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="jarak" class="w-2/4 pr-2">Jarak Tempat Tinggal</label>
+                <input type="number" name="jarak_tempat_tinggal" id="jarak" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="waktu" class="w-2/4 pr-2">Waktu Tempuh Ke-sekolah</label>
+                <input type="number" name="waktu_tempuh_sekolah" id="waktu" class="w-2/3 p-2 border ">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="saudara" class="w-2/4 pr-2">Jumlah Saudara Kandung</label>
+                <input type="number" name="jumlah_saudara_kandung" id="saudara" class="w-2/3 p-2 border ">
+            </div>
+            <p class="text-lg font-bold mb-4">Pertanyaan Keamanan</p>
+            <div class="flex items-center mb-4">
+                <label for="keamanan" class="w-2/4 pr-2">Pertanyaan <span class="text-red-700">*</span></label>
+                <div class="flex w-2/3">
+                    <input type="checkbox" name="keamanan" id="keamanan" class="mr-2" required>
+                    <span>Saya menyatakan dengan sesungguhnya bahwa isian data dalam formulir ini adalah benar. Apabila
+                        ternyata data tersebut tidak benar / palsu, maka saya bersedia menerima sanksi sesuai ketentuan
+                        yang berlaku di </span>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-6">
+                <button type="submit" class="bg-blue-700 text-white text-lg px-4 py-2  hover:bg-blue-600">Kirim
+                    Formulir
+                    Pendaftaran</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
