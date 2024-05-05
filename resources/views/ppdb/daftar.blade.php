@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Daftar PPDB</title>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-B3zpz1CS.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-Dvj3ZyXu.css') }}">
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
@@ -200,7 +200,7 @@
             </div>
             <div class="flex items-center mb-4">
                 <label for="alamat_ayah" class="w-2/4 pr-2">Alamat Ayah</label>
-                <input type="text" name="alamat_ayah" id="alamat_ayah" class="w-2/3 p-2 border " required>
+                <input type="text" name="alamat_ayah" id="alamat_ayah" class="w-2/3 p-2 border ">
             </div>
             <div class="flex items-center mb-4">
                 <label for="ayah_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
