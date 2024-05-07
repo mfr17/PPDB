@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Students extends Model
 {
@@ -69,4 +70,73 @@ class Students extends Model
         'jumlah_saudara_kandung',
 
     ];
+    public function TahunAjaran(): BelongsTo
+    {
+        return $this->belongsTo(AcademicYears::class);
+    }
+
+    public function JalurPendaftaran(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function JurusanSatu(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function JurusanDua(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function Agama(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function KebutuhanKhusus(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function ModaTransportasi(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function TempatTinggal(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function AyahPendidikan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function IbuPendidikan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function WaliPendidikan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function AyahPekerjaan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function IbuPekerjaan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function WaliPekerjaan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function AyahPenghasilan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function IbuPenghasilan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
+    public function WaliPenghasilan(): BelongsTo
+    {
+        return $this->belongsTo(Options::class);
+    }
 }

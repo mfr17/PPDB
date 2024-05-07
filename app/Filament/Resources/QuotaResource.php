@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QuotaResource extends Resource
 {
+    protected static ?int $navigationSort = 2;
     protected static ?string $model = AdmissionQuotas::class;
     protected static ?string $slug = 'kuota-penerimaan';
     protected static ?string $navigationLabel = 'Kuota Penerimaan';

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SettingResource extends Resource
 {
+    protected static ?int $navigationSort = 5;
     protected static ?string $model = Setting::class;
     protected static ?string $navigationLabel = 'Pengaturan';
     protected static ?string $pluralModelLabel = 'Pengaturan';

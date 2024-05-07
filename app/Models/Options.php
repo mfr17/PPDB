@@ -22,4 +22,40 @@ class Options extends Model
     {
         return $this->hasMany(AdmissionQuotas::class);
     }
+    public function Jurusan(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
+    public function Jalur(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
+    public function Tinggal(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
+    public function Transpotasi(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
+    public function Agama(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
+    public function KebutuhanKhusus(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
+    public function Pendidikan(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
+    public function Pekerjaan(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
+    public function Penghasilan(): HasMany
+    {
+        return $this->hasMany(Students::class);
+    }
 }

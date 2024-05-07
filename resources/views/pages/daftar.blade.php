@@ -12,6 +12,18 @@
 
 <body class="bg-gray-100 p-2">
     <div class="max-w-screen-2xl md:max-w-screen-xl sm:max-w-screen-sm mx-auto bg-white p-6  shadow-md">
+        <div class="px-8 mb-4">
+            @if ($errors->any())
+                <div class="bg-red-500 text-white font-bold px-4 py-2">
+                    Terjadi Kesalahan...
+                </div>
+                <ul class="border border-t-0 border-red-400 bg-red-100 px-4 py-2 text-red-700">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
         <form action="{{ route('students.store') }}" method="POST">
             @csrf
             <div class="mb-4">
@@ -21,8 +33,9 @@
                     <label for="jenis_pendaftaran" class="w-2/4 pr-2">Jenis Pendaftaran <span
                             class="text-red-700">*</span></label>
                     <select name="jenis_pendaftaran" id="jenis_pendaftaran" class="w-2/3 p-2 border " required>
-                        <option value="true">Baru</option>
-                        <option value="false">Pindahan</option>
+                        <option value="true" {{ old('jenis_pendaftaran') == 'true' ? 'selected' : '' }}>Baru</option>
+                        <option value="false"{{ old('jenis_pendaftaran') == 'false' ? 'selected' : '' }}>Pindahan
+                        </option>
                     </select>
                 </div>
                 <div class="flex items-center mb-4">
@@ -30,7 +43,9 @@
                             class="text-red-700">*</span></label>
                     <select name="jalur_pendaftaran_id" id="jalur_pendaftaran" class="w-2/3 p-2 border " required>
                         @foreach ($jalur as $key => $value)
-                            <option value="{{ $key }}">{{ $value }}</option>
+                            <option
+                                value="{{ $key }} "{{ old('jalur_pendaftaran_id') == $key ? 'selected' : '' }}>
+                                {{ $value }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -38,7 +53,8 @@
                     <label for="jurusan_1" class="w-2/4 pr-2">Jurusan Pertama<span class="text-red-700">*</span></label>
                     <select name="jurusan_satu_id" id="jurusan_1" class="w-2/3 p-2 border " required>
                         @foreach ($jurusan as $key => $value)
-                            <option value="{{ $key }}">{{ $value }}</option>
+                            <option value="{{ $key }}" {{ old('jurusan_satu_id') == $key ? 'selected' : '' }}>
+                                {{ $value }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -46,64 +62,72 @@
                     <label for="jurusan_2" class="w-2/4 pr-2">Jurusan Kedua<span class="text-red-700">*</span></label>
                     <select name="jurusan_dua_id" id="jurusan_2" class="w-2/3 p-2 border " required>
                         @foreach ($jurusan as $key => $value)
-                            <option value="{{ $key }}">{{ $value }}</option>
+                            <option value="{{ $key }}" {{ old('jurusan_dua_id') == $key ? 'selected' : '' }}>
+                                {{ $value }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="flex items-center mb-4">
                     <label for="asal_sekolah" class="w-2/4 pr-2">Asal Sekolah</label>
-                    <input type="text" name="asal_sekolah" id="asal_sekolah" class="w-2/3 p-2 border ">
+                    <input type="text" name="asal_sekolah" id="asal_sekolah" class="w-2/3 p-2 border "
+                        value="{{ old('asal_sekolah') }}">
                 </div>
                 <div class="flex items-center mb-4">
                     <label for="alamat_asal_sekolah" class="w-2/4 pr-2">Alamat Asal Sekolah</label>
-                    <input type="text" name="alamat_asal_sekolah" id="alamat_asal_sekolah" class="w-2/3 p-2 border ">
+                    <input type="text" name="alamat_asal_sekolah" id="alamat_asal_sekolah" class="w-2/3 p-2 border "
+                        value=" {{ old('alamat_asal_sekolah') }}">
                 </div>
                 <div class="flex items-center mb-4">
                     <label for="hobi" class="w-2/4 pr-2">Hobi</label>
-                    <input type="text" name="hobi" id="hobi" class="w-2/3 p-2 border ">
+                    <input type="text" name="hobi" id="hobi" class="w-2/3 p-2 border"
+                        value="{{ old('hobi') }}">
                 </div>
                 <div class="flex items-center mb-4">
                     <label for="cita_cita" class="w-2/4 pr-2">Cita-Cita</label>
-                    <input type="text" name="cita_cita" id="cita_cita" class="w-2/3 p-2 border ">
+                    <input type="text" name="cita_cita" id="cita_cita" class="w-2/3 p-2 border "
+                        value="{{ old('cita_cita') }}">
                 </div>
             </div>
 
             <p class="text-lg font-bold mb-4">Data Diri</p>
             <div class="flex items-center mb-4">
                 <label for="nama" class="w-2/4 pr-2">Nama Lengkap <span class="text-red-700">*</span></label>
-                <input type="text" name="nama" id="nama" class="w-2/3 p-2 border" required>
+                <input type="text" name="nama" id="nama" class="w-2/3 p-2 border"
+                    value="{{ old('nama') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="jenis_kelamin" class="w-2/4 pr-2">Jenis Kelamin</label>
                 <select name="jenis_kelamin" id="jenis_kelamin" class="w-2/3 p-2 border ">
-                    <option value="M">Laki-Laki</option>
-                    <option value="F">Perempuan</option>
+                    <option value="M" {{ old('jenis_kelamin') == 'M' ? 'selected' : '' }}>Laki-Laki</option>
+                    <option value="F" {{ old('jenis_kelamin') == 'F' ? 'selected' : '' }}>Perempuan</option>
                 </select>
             </div>
             <div class="flex items-center mb-4">
                 <label for="nik" class="w-2/4 pr-2">NIK <span class="text-red-700">*</span></label>
-                <input type="text" name="nik" id="nik" class="w-2/3 p-2 border " maxlength="16" required>
+                <input type="text" name="nik" id="nik" class="w-2/3 p-2 border " maxlength="16"
+                    value="{{ old('nik') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="no_kk" class="w-2/4 pr-2">Nomor KK <span class="text-red-700">*</span></label>
                 <input type="text" name="no_kk" id="no_kk" class="w-2/3 p-2 border " maxlength="16"
-                    required>
+                    value="{{ old('no_kk') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="nis" class="w-2/4 pr-2">NIS <span class="text-red-700">*</span></label>
                 <input type="text" name="nis" id="nis" class="w-2/3 p-2 border " maxlength="10"
-                    required>
+                    value="{{ old('nis') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="nisn" class="w-2/4 pr-2">NISN <span class="text-red-700">*</span></label>
                 <input type="text" name="nisn" id="nisn" class="w-2/3 p-2 border " maxlength="10"
-                    required>
+                    value="{{ old('nisn') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="agama" class="w-2/4 pr-2">Agama</label>
                 <select name="agama_id" id="agama" class="w-2/3 p-2 border ">
                     @foreach ($agama as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}" {{ old('agama_id') == $key ? 'selected' : '' }}>
+                            {{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -112,45 +136,56 @@
                         class="text-red-700">*</span></label>
                 <select name="kebutuhan_khusus_id" id="kebutuhan_khusus" class="w-2/3 p-2 border " required>
                     @foreach ($kebutuhan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option
+                            value="{{ $key }}"{{ old('kebutuhan_khusus_id') == $key ? 'selected' : '' }}>
+                            {{ $value }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="flex items-center mb-4">
                 <label for="tmpt_lahir" class="w-2/4 pr-2">Tempat Lahir <span class="text-red-700">*</span></label>
-                <input type="text" name="tempat_lahir" id="tmpt_lahir" class="w-2/3 p-2 border " required>
+                <input type="text" name="tempat_lahir" id="tmpt_lahir" class="w-2/3 p-2 border "
+                    value="{{ old('tempat_lahir') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="tgl_lahir" class="w-2/4 pr-2">Tanggal Lahir <span class="text-red-700">*</span></label>
-                <input type="date" name="tanggal_lahir" id="tgl_lahir" class="w-2/3 p-2 border " required>
+                <input type="date" name="tanggal_lahir" id="tgl_lahir" class="w-2/3 p-2 border "
+                    value="{{ old('tanggal_lahir') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="alamat" class="w-2/4 pr-2">Alamat <span class="text-red-700">*</span></label>
-                <input type="text" name="alamat" id="alamat" class="w-2/3 p-2 border " required>
+                <input type="text" name="alamat" id="alamat" class="w-2/3 p-2 border "
+                    value="{{ old('alamat') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="desa" class="w-2/4 pr-2">Desa <span class="text-red-700">*</span></label>
-                <input type="text" name="desa" id="desa" class="w-2/3 p-2 border " required>
+                <input type="text" name="desa" id="desa" class="w-2/3 p-2 border "
+                    value="{{ old('desa') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="kecamatan" class="w-2/4 pr-2">Kecamatan <span class="text-red-700">*</span></label>
-                <input type="text" name="kecamatan" id="kecamatan" class="w-2/3 p-2 border " required>
+                <input type="text" name="kecamatan" id="kecamatan"
+                    class="w-2/3 p-2 border "value="{{ old('kecamatan') }}" required>
             </div>
             <div class="flex items-center mb-4">
-                <label for="alamat" class="w-2/4 pr-2">Kota/Kabupaten <span class="text-red-700">*</span></label>
-                <input type="text" name="kota_kabupaten" id="kota_kabupaten" class="w-2/3 p-2 border " required>
+                <label for="kota_kabupaten" class="w-2/4 pr-2">Kota/Kabupaten <span
+                        class="text-red-700">*</span></label>
+                <input type="text" name="kota_kabupaten" id="kota_kabupaten"
+                    class="w-2/3 p-2 border "value="{{ old('kota_kabupaten') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="kode_pos" class="w-2/4 pr-2">Kode Pos <span class="text-red-700">*</span></label>
-                <input type="text" name="kode_pos" id="kode_pos" class="w-2/3 p-2 border " maxlength="5"
-                    required>
+                <input type="text" name="kode_pos" id="kode_pos"
+                    class="w-2/3 p-2 border "value="{{ old('kode_pos') }}" maxlength="5" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="tempat_tinggal" class="w-2/4 pr-2">Tinggal Bersama <span
                         class="text-red-700">*</span></label>
                 <select name="tempat_tinggal_id" id="tempat_tinggal" class="w-2/3 p-2 border " required>
                     @foreach ($tempat_tinggal as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            value="{{ old('tempat_tinggal_id') == $key ? 'selected' : '' }}">{{ $value }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -159,58 +194,68 @@
                         class="text-red-700">*</span></label>
                 <select name="moda_transpotasi_id" id="transpotasi" class="w-2/3 p-2 border " required>
                     @foreach ($transpotasi as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            value="{{ old('moda_transpotasi_id') == $key ? 'selected' : '' }}">{{ $value }}
+                        </option>
                     @endforeach
                 </select>
             </div>
             <div class="flex items-center mb-4">
                 <label for="no_hp" class="w-2/4 pr-2">Nomor HP <span class="text-red-700">*</span></label>
-                <input type="tel" name="no_hp" id="no_hp" class="w-2/3 p-2 border " maxlength="13"
-                    required>
+                <input type="tel" name="no_hp" id="no_hp" class="w-2/3 p-2 border "
+                    value="{{ old('no_hp') }}" maxlength="13" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="email" class="w-2/4 pr-2">Email <span class="text-red-700">*</span></label>
-                <input type="email" name="email" id="email" class="w-2/3 p-2 border " required>
+                <input type="email" name="email" id="email" class="w-2/3 p-2 border "
+                    value="{{ old('email') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="sktm" class="w-2/4 pr-2">SKTM (Jika Ada)</label>
-                <input type="tel" name="sktm" id="sktm" class="w-2/3 p-2 border ">
+                <input type="tel" name="sktm" id="sktm" class="w-2/3 p-2 border "
+                    value="{{ old('nisn') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="kip" class="w-2/4 pr-2">KIP (Jika Ada)</label>
-                <input type="kip" name="kip" id="kip" class="w-2/3 p-2 border ">
+                <input type="kip" name="kip" id="kip" class="w-2/3 p-2 border "
+                    value="{{ old('nisn') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="kewarganegaraan" class="w-2/4 pr-2">Kewarganegaraan <span
                         class="text-red-700">*</span></label>
                 <select name="kewarganegaraan" id="kewarganegaraan" class="w-2/3 p-2 border " required>
-                    <option value="WNI">WNI</option>
-                    <option value="WNA">WNA</option>
+                    <option value="WNI" {{ old('kewarganegaraan') == 'WNI' ? 'selected' : '' }}>WNI</option>
+                    <option value="WNA" {{ old('kewarganegaraan') == 'WNA' ? 'selected' : '' }}>WNA</option>
                 </select>
             </div>
 
             <p class="text-lg font-bold mb-4">Data Orang Tua/Wali</p>
             <div class="flex items-center mb-4">
                 <label for="nama_ayah" class="w-2/4 pr-2">Nama Ayah <span class="text-red-700">*</span></label>
-                <input type="text" name="nama_ayah" id="nama_ayah" class="w-2/3 p-2 border " required>
+                <input type="text" name="nama_ayah" id="nama_ayah" class="w-2/3 p-2 border "
+                    value="{{ old('nama_ayah') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="nik_ayah" class="w-2/4 pr-2">NIK </label>
-                <input type="text" name="nik_ayah" id="nik_ayah" class="w-2/3 p-2 border " maxlength="16">
+                <input type="text" name="nik_ayah" id="nik_ayah" class="w-2/3 p-2 border " maxlength="16"
+                    value="{{ old('nik_ayah') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="alamat_ayah" class="w-2/4 pr-2">Alamat Ayah</label>
-                <input type="text" name="alamat_ayah" id="alamat_ayah" class="w-2/3 p-2 border ">
+                <input type="text" name="alamat_ayah" id="alamat_ayah" class="w-2/3 p-2 border "
+                    value="{{ old('alamat_ayah') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="ayah_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
-                <input type="date" name="ayah_tanggal_lahir" id="ayah_tanggal_lahir" class="w-2/3 p-2 border ">
+                <input type="date" name="ayah_tanggal_lahir" id="ayah_tanggal_lahir" class="w-2/3 p-2 border "
+                    value="{{ old('ayah_tanggal_lahir') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="ayah_pendidikan" class="w-2/4 pr-2">Pendidikan Terakhir</label>
                 <select name="ayah_pendidikan_id" id="ayah_pendidikan" class="w-2/3 p-2 border ">
                     @foreach ($pendidikan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            {{ old('ayah_pendidikan_id') == $key ? 'selected' : '' }}>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -218,7 +263,9 @@
                 <label for="ayah_pekerjaan" class="w-2/4 pr-2">Pekerjaan</label>
                 <select name="ayah_pekerjaan_id" id="ayah_pekerjaan" class="w-2/3 p-2 border ">
                     @foreach ($pekerjaan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            {{ old('ayah_pekerjaan_id') == $key ? 'selected' : ' ' }}>
+                            {{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -227,31 +274,37 @@
                 <select name="ayah_penghasilan_id" id="ayah_penghasilan" class="w-2/3 p-2 border ">
                     <option value="" hidden selected>Pilih Penghasilan</option>
                     @foreach ($pendapatan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            {{ old('ayah_penghasilan_id') == $key ? 'selected' : ' ' }}>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="flex items-center mb-4">
                 <label for="nama_ibu" class="w-2/4 pr-2">Nama Ibu <span class="text-red-700">*</span></label>
-                <input type="text" name="nama_ibu" id="nama_ibu" class="w-2/3 p-2 border " required>
+                <input type="text" name="nama_ibu" id="nama_ibu" class="w-2/3 p-2 border "
+                    value="{{ old('nama_ibu') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="nik_ibu" class="w-2/4 pr-2">NIK</label>
-                <input type="text" name="nik_ibu" id="nik_ibu" class="w-2/3 p-2 border " maxlength="16">
+                <input type="text" name="nik_ibu" id="nik_ibu" class="w-2/3 p-2 border " maxlength="16"
+                    value="{{ old('nik_ibu') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="alamat_ibu" class="w-2/4 pr-2">Alamat Ibu</label>
-                <input type="text" name="alamat_ibu" id="alamat_ibu" class="w-2/3 p-2 border ">
+                <input type="text" name="alamat_ibu" id="alamat_ibu" class="w-2/3 p-2 border "
+                    value="{{ old('alamat_ibu') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="ibu_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
-                <input type="date" name="ibu_tanggal_lahir" id="ibu_tanggal_lahir" class="w-2/3 p-2 border ">
+                <input type="date" name="ibu_tanggal_lahir" id="ibu_tanggal_lahir" class="w-2/3 p-2 border "
+                    value="{{ old('ibu_tanggal_lahir') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="ibu_pendidikan" class="w-2/4 pr-2">Pendidikan Terakhir</label>
                 <select name="ibu_pendidikan_id" id="ibu_pendidikan" class="w-2/3 p-2 border ">
                     @foreach ($pendidikan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            {{ old('ibu_pendidikan_id') == $key ? 'selected' : ' ' }}>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -259,7 +312,8 @@
                 <label for="ibu_pekerjaan" class="w-2/4 pr-2">Pekerjaan</label>
                 <select name="ibu_pekerjaan_id" id="ibu_pekerjaan" class="w-2/3 p-2 border ">
                     @foreach ($pekerjaan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}" {{ old('ibu_pekerjaan_id') == $key ? 'selected' : ' ' }}>
+                            {{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -268,7 +322,8 @@
                 <select name="ibu_penghasilan_id" id="ibu_penghasilan" class="w-2/3 p-2 border ">
                     <option value="" hidden selected>Pilih Penghasilan</option>
                     @foreach ($pendapatan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            {{ old('ibu_penghasilan_id') == $key ? 'selected' : ' ' }}>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -276,26 +331,31 @@
 
             <div class="flex items-center mb-4">
                 <label for="nama_wali" class="w-2/4 pr-2">Nama Wali</label>
-                <input type="text" name="nama_wali" id="nama_wali" class="w-2/3 p-2 border ">
+                <input type="text" name="nama_wali" id="nama_wali" class="w-2/3 p-2 border "
+                    value="{{ old('nama_wali') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="nik_wali" class="w-2/4 pr-2">NIK</label>
-                <input type="text" name="nik_wali" id="nik_wali" class="w-2/3 p-2 border " maxlength="16">
+                <input type="text" name="nik_wali" id="nik_wali" class="w-2/3 p-2 border " maxlength="16"
+                    value="{{ old('nik_wali') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="alamat_wali" class="w-2/4 pr-2">Alamat Wali</label>
-                <input type="text" name="alamat_wali" id="alamat_wali" class="w-2/3 p-2 border ">
+                <input type="text" name="alamat_wali" id="alamat_wali" class="w-2/3 p-2 border "
+                    value="{{ old('alamat_wali') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="wali_tanggal_lahir" class="w-2/4 pr-2">Tanggal Lahir</label>
-                <input type="date" name="wali_tanggal_lahir" id="wali_tanggal_lahir" class="w-2/3 p-2 border ">
+                <input type="date" name="wali_tanggal_lahir" id="wali_tanggal_lahir" class="w-2/3 p-2 border "
+                    value="{{ old('wali_tanggal_lahir') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="wali_pendidikan" class="w-2/4 pr-2">Pendidikan Terakhir</label>
                 <select name="wali_pendidikan_id" id="wali_pendidikan" class="w-2/3 p-2 border ">
                     <option value="" hidden selected>Pilih Pendidikan</option>
                     @foreach ($pendidikan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            {{ old('wali_pendidikan_id') == $key ? 'selected' : ' ' }}>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -304,7 +364,8 @@
                 <select name="wali_pekerjaan_id" id="wali_pekerjaan" class="w-2/3 p-2 border ">
                     <option value="" hidden selected>Pilih Pekerjaan</option>
                     @foreach ($pekerjaan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            {{ old('wali_pekerjaan_id') == $key ? 'selected' : ' ' }}>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -313,7 +374,8 @@
                 <select name="wali_penghasilan_id" id="wali_penghasilan" class="w-2/3 p-2 border ">
                     <option value="" hidden selected>Pilih Penghasilan</option>
                     @foreach ($pendapatan as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                        <option value="{{ $key }}"
+                            {{ old('wali_pendapatan_id') == $key ? 'selected' : ' ' }}>{{ $value }}</option>
                     @endforeach
                 </select>
 

@@ -23,6 +23,7 @@ use function Laravel\Prompts\text;
 
 class AcademicYearResource extends Resource
 {
+    protected static ?int $navigationSort = 3;
     protected static ?string $model = AcademicYears::class;
     protected static ?string $slug = 'tahun-ajaran';
     protected static ?string $navigationLabel = 'Tahun Ajaran';

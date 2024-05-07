@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('hasil_seleksi_pmb')->nullable()->comment('Hasil seleksi PMB');
             $table->bigInteger('jurusan_satu_id')->comment('Jurusan 1 Siswa');
             $table->bigInteger('jurusan_dua_id')->comment('Jurusan 2 Siswa');
-            $table->enum('registrasi_ulang', ['true', 'false'])->nullable()->comment('Konfirmasi pendaftaran ulang');
-            $table->bigInteger('no_ijazah')->nullable()->comment('Nomor Ijazah sebelumnya');
+            $table->enum('registrasi_ulang', ['Baru', 'Pindahan'])->nullable()->comment('Konfirmasi pendaftaran ulang');
+            $table->string('no_ijazah')->nullable()->comment('Nomor Ijazah sebelumnya');
             $table->string('asal_sekolah')->nullable()->comment('Asal sekolah');
             $table->string('alamat_asal_sekolah')->nullable()->comment('Alamat sekolah');
             $table->string('hobi')->nullable()->comment('Hobi');
@@ -28,7 +28,7 @@ return new class extends Migration
 
             // Data Pribadi
             $table->string('nama')->comment('Nama lengkap siswa');
-            $table->enum('jenis_kelamin', ['M', 'F'])->comment('Jenis kelamin siswa (L/P)');
+            $table->enum('jenis_kelamin', ['L', 'P'])->comment('Jenis kelamin siswa (L/P)');
             $table->bigInteger('nik')->unique()->comment('Nomor Induk Kependudukan');
             $table->bigInteger('nis')->nullable()->comment('Nomor Induk Siswa');
             $table->bigInteger('nisn')->nullable()->comment('Nomor Induk Siswa Nasional');
@@ -63,8 +63,6 @@ return new class extends Migration
             $table->bigInteger('ibu_pekerjaan_id')->nullable()->comment('Pekerjaan ibu');
             $table->bigInteger('ibu_penghasilan_id')->nullable()->comment('Rentang penghasilan ibu');
             // Data Wali
-
-
             $table->string('nama_wali')->nullable()->comment('Nama Wali');
             $table->string('alamat_wali')->nullable()->comment('Alamat Wali');
             $table->date('wali_tanggal_lahir')->nullable()->comment('Tanggal lahir wali');
