@@ -82,6 +82,11 @@ class StudentsResource extends Resource
                                 'P' => 'Perempuan'
                             ])
                             ->required(),
+                        TextInput::make('anak_ke')
+                            ->label('Anak Ke-')
+                            ->numeric()
+                            ->required()
+                            ->maxLength(2),
                         TextInput::make('nik')
                             ->label('NIK')
                             ->unique(table: Students::class, ignoreRecord: true)
@@ -136,6 +141,10 @@ class StudentsResource extends Resource
                             ->label('Nomor HP')
                             ->tel()
                             ->required(),
+                        TextInput::make('no_hp_ortu')
+                            ->label('Nomor HP Orang Tua/Wali')
+                            ->tel()
+                            ->required(),
                         TextInput::make('email')
                             ->label('Email')
                             ->email()
@@ -144,6 +153,13 @@ class StudentsResource extends Resource
                             ->label('Nomor SKTM'),
                         TextInput::make('kip')
                             ->label('Nomor KIP'),
+                        Select::make('kewarganegaraan')
+                            ->label('Kewarganegaraan')
+                            ->options([
+                                'WNI' => 'WNI',
+                                'WNA' => 'WNA'
+                            ])
+                            ->required(),
                     ]),
                 Fieldset::make('Data Ayah')
                     ->schema([
@@ -227,7 +243,7 @@ class StudentsResource extends Resource
 
     public static function table(Table $table): Table
     {
-        $filter = "false";
+        $filter = "Tidak";
         return $table
             ->modifyQueryUsing(function (Builder $query) use ($filter) {
                 $query->where('registrasi_ulang', $filter);

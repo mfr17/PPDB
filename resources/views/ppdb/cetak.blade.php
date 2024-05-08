@@ -72,7 +72,7 @@
                     <p class='small'>E-mail: <a href='mailto:smkn1sbl@gmail.com'>smkn1sbl@gmail.com</a> | <a
                             href='https://smkn1sebulu.sch.id'>https://smkn1sebulu.sch.id</a></p>
                 </td>
-                <td><img src='image/logo_smkn1sbl.jpg' width='85px'></td>
+                <td><img src='image/logo_smkn1sbl.png' width='85px'></td>
             </tr>
         </table>
         <br>

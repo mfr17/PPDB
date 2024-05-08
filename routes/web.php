@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentAddmissionController;
 use App\Http\Controllers\TempController;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('surat.kop');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/daftar', [StudentAddmissionController::class, 'create'])->name('students.create');
 Route::get('/{id}/cetak-pdf', [StudentAddmissionController::class, 'cetak'])->name('students.cetak')->middleware('auth');
