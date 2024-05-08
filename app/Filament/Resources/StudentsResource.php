@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\StudentsResource\Pages;
 use App\Filament\Resources\StudentsResource\RelationManagers;
 use App\Models\Students;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
@@ -14,7 +15,9 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action as Actions;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -232,9 +235,11 @@ class StudentsResource extends Resource
             ->columns([
                 TextColumn::make('no_pendaftaran')
                     ->label('No Pendaftaran')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('nama')
                     ->label('Nama Lengkap')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('tanggal_lahir')
                     ->label('Tanggal Lahir')
@@ -247,20 +252,26 @@ class StudentsResource extends Resource
                 TextColumn::make('JalurPendaftaran.option_name')
                     ->label('Jalur Pendaftaran')
                     ->sortable(),
-                IconColumn::make('registrasi_ulang')
-                    ->label('Registrasi Ulang?')
-                    ->icon(fn (string $state): string => match ($state) {
-                        'true' => 'heroicon-o-check-circle',
-                        'false' => 'heroicon-o-x-circle',
-                    })
-                    ->sortable(),
+                SelectColumn::make('hasil_seleksi_pmb')
+                    ->label('Hasil Seleksi')
+                    ->searchable()
+                    ->sortable()
+                    ->options([
+                        'lolos' => 'Lolos',
+                        'tidak' => 'Tidak Lolos',
+                    ])
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Ubah'),
+                Actions::make('Cetak')
+                    ->icon('heroicon-o-printer')
+                    ->color('warning')
+                    ->url(fn (Students $id) => route('students.cetak', $id))
+                    ->openUrlInNewTab(),
+                Tables\Actions\DeleteAction::make()->label('Hapus'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->bigInteger('no_kk')->nullable()->after('nik');
-            $table->bigInteger('nik_ayah')->nullable()->after('nama_ayah');
-            $table->bigInteger('nik_ibu')->nullable()->after('nama_ibu');
-            $table->bigInteger('nik_wali')->nullable()->after('nama_wali');
+            $table->string('no_kk')->nullable()->after('nik');
+            $table->string('nik_ayah')->nullable()->after('nama_ayah');
+            $table->string('nik_ibu')->nullable()->after('nama_ibu');
+            $table->string('nik_wali')->nullable()->after('nama_wali');
             $table->smallInteger('lingkar_kepala')->nullable()->after('berat_badan');
+            $table->smallInteger('anak_ke')->nullable()->after('kewarganegaraan');
         });
     }
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Daftar PPDB</title>
+    <title>{{ $_ENV['APP_NAME'] }}</title>
     <link rel="stylesheet" href="{{ asset('build/assets/app-Dvj3ZyXu.css') }}">
     {{-- @vite('resources/css/app.css') --}}
 </head>
@@ -13,6 +13,11 @@
 <body class="bg-gray-100 p-2">
     <div class="max-w-screen-2xl md:max-w-screen-xl sm:max-w-screen-sm mx-auto bg-white p-6  shadow-md">
         <div class="px-8 mb-4">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="bg-red-500 text-white font-bold px-4 py-2">
                     Terjadi Kesalahan...
@@ -27,14 +32,14 @@
         <form action="{{ route('students.store') }}" method="POST">
             @csrf
             <div class="mb-4">
-                <p class="text-lg font-bold mb-4">Registrati Peserta Didik <span class="text-red-700">*</span></p>
+                <p class="text-lg font-bold mb-4">Registrati Peserta Didik</p>
 
                 <div class="flex items-center mb-4">
                     <label for="jenis_pendaftaran" class="w-2/4 pr-2">Jenis Pendaftaran <span
                             class="text-red-700">*</span></label>
                     <select name="jenis_pendaftaran" id="jenis_pendaftaran" class="w-2/3 p-2 border " required>
-                        <option value="true" {{ old('jenis_pendaftaran') == 'true' ? 'selected' : '' }}>Baru</option>
-                        <option value="false"{{ old('jenis_pendaftaran') == 'false' ? 'selected' : '' }}>Pindahan
+                        <option value="Baru" {{ old('jenis_pendaftaran') == 'true' ? 'selected' : '' }}>Baru</option>
+                        <option value="Pindahan"{{ old('jenis_pendaftaran') == 'false' ? 'selected' : '' }}>Pindahan
                         </option>
                     </select>
                 </div>
@@ -53,7 +58,8 @@
                     <label for="jurusan_1" class="w-2/4 pr-2">Jurusan Pertama<span class="text-red-700">*</span></label>
                     <select name="jurusan_satu_id" id="jurusan_1" class="w-2/3 p-2 border " required>
                         @foreach ($jurusan as $key => $value)
-                            <option value="{{ $key }}" {{ old('jurusan_satu_id') == $key ? 'selected' : '' }}>
+                            <option value="{{ $key }}"
+                                {{ old('jurusan_satu_id') == $key ? 'selected' : '' }}>
                                 {{ $value }}</option>
                         @endforeach
                     </select>
@@ -98,8 +104,8 @@
             <div class="flex items-center mb-4">
                 <label for="jenis_kelamin" class="w-2/4 pr-2">Jenis Kelamin</label>
                 <select name="jenis_kelamin" id="jenis_kelamin" class="w-2/3 p-2 border ">
-                    <option value="M" {{ old('jenis_kelamin') == 'M' ? 'selected' : '' }}>Laki-Laki</option>
-                    <option value="F" {{ old('jenis_kelamin') == 'F' ? 'selected' : '' }}>Perempuan</option>
+                    <option value="L" {{ old('jenis_kelamin') == 'M' ? 'selected' : '' }}>Laki-Laki</option>
+                    <option value="P" {{ old('jenis_kelamin') == 'F' ? 'selected' : '' }}>Perempuan</option>
                 </select>
             </div>
             <div class="flex items-center mb-4">
@@ -132,7 +138,7 @@
                 </select>
             </div>
             <div class="flex items-center mb-4">
-                <label for="transpotasi" class="w-2/4 pr-2">Kebutuhan Khusus <span
+                <label for="kebutuhan_khusus" class="w-2/4 pr-2">Kebutuhan Khusus <span
                         class="text-red-700">*</span></label>
                 <select name="kebutuhan_khusus_id" id="kebutuhan_khusus" class="w-2/3 p-2 border " required>
                     @foreach ($kebutuhan as $key => $value)
@@ -190,12 +196,12 @@
                 </select>
             </div>
             <div class="flex items-center mb-4">
-                <label for="transpotasi" class="w-2/4 pr-2">Moda Transpotasi <span
+                <label for="transportasi" class="w-2/4 pr-2">Moda Transpotasi <span
                         class="text-red-700">*</span></label>
-                <select name="moda_transpotasi_id" id="transpotasi" class="w-2/3 p-2 border " required>
+                <select name="moda_transportasi_id" id="transportasi" class="w-2/3 p-2 border " required>
                     @foreach ($transpotasi as $key => $value)
                         <option value="{{ $key }}"
-                            value="{{ old('moda_transpotasi_id') == $key ? 'selected' : '' }}">{{ $value }}
+                            value="{{ old('moda_transportasi_id') == $key ? 'selected' : '' }}">{{ $value }}
                         </option>
                     @endforeach
                 </select>
@@ -206,19 +212,30 @@
                     value="{{ old('no_hp') }}" maxlength="13" required>
             </div>
             <div class="flex items-center mb-4">
+                <label for="no_hp_ortu" class="w-2/4 pr-2">Nomor HP Orang Tua/Wali <span
+                        class="text-red-700">*</span></label>
+                <input type="tel" name="no_hp_ortu" id="no_hp_ortu" class="w-2/3 p-2 border "
+                    value="{{ old('no_hp_ortu') }}" maxlength="13" required>
+            </div>
+            <div class="flex items-center mb-4">
                 <label for="email" class="w-2/4 pr-2">Email <span class="text-red-700">*</span></label>
                 <input type="email" name="email" id="email" class="w-2/3 p-2 border "
                     value="{{ old('email') }}" required>
             </div>
             <div class="flex items-center mb-4">
                 <label for="sktm" class="w-2/4 pr-2">SKTM (Jika Ada)</label>
-                <input type="tel" name="sktm" id="sktm" class="w-2/3 p-2 border "
-                    value="{{ old('nisn') }}">
+                <input type="text" name="sktm" id="sktm" class="w-2/3 p-2 border "
+                    value="{{ old('sktm') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="kip" class="w-2/4 pr-2">KIP (Jika Ada)</label>
-                <input type="kip" name="kip" id="kip" class="w-2/3 p-2 border "
-                    value="{{ old('nisn') }}">
+                <input type="text" name="kip" id="kip" class="w-2/3 p-2 border "
+                    value="{{ old('kip') }}">
+            </div>
+            <div class="flex items-center mb-4">
+                <label for="anak_ke" class="w-2/4 pr-2">Anak Ke- <span class="text-red-700">*</span></label>
+                <input type="text" name="anak_ke" id="anak_ke" class="w-2/3 p-2 border "
+                    value="{{ old('anak_ke') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="kewarganegaraan" class="w-2/4 pr-2">Kewarganegaraan <span
@@ -228,6 +245,7 @@
                     <option value="WNA" {{ old('kewarganegaraan') == 'WNA' ? 'selected' : '' }}>WNA</option>
                 </select>
             </div>
+
 
             <p class="text-lg font-bold mb-4">Data Orang Tua/Wali</p>
             <div class="flex items-center mb-4">
@@ -383,32 +401,33 @@
             <p class="text-lg font-bold mb-4">Data Periodik</p>
             <div class="flex items-center mb-4">
                 <label for="tinggi_badan" class="w-2/4 pr-2">Tinggi Badan (Cm)</label>
-                <input type="number" name="tinggi_badan" id="tinggi_badan" class="w-2/3 p-2 border "
-                    maxlength="3">
+                <input type="number" name="tinggi_badan" id="tinggi_badan"
+                    class="w-2/3 p-2 border "value="{{ old('tinggi_badan') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="berat_badan" class="w-2/4 pr-2">Beran Badan (Kg)</label>
-                <input type="number" name="berat_badan" id="berat_badan" class="w-2/3 p-2 border " maxlength="3">
+                <input type="number" name="berat_badan" id="berat_badan"
+                    class="w-2/3 p-2 border "value="{{ old('berat_badan') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="lingkar_kepala" class="w-2/4 pr-2">Lingkar Kepala (Cm)</label>
-                <input type="number" name="lingkar_kepala" id="lingkar_kepala" class="w-2/3 p-2 border "
-                    maxlength="2">
+                <input type="number" name="lingkar_kepala" id="lingkar_kepala"
+                    class="w-2/3 p-2 border "value="{{ old('lingkar_kepala') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="jarak" class="w-2/4 pr-2">Jarak Tempat Tinggal (Km)</label>
-                <input type="number" name="jarak_tempat_tinggal" id="jarak" class="w-2/3 p-2 border "
-                    maxlength="3">
+                <input type="number" name="jarak_tempat_tinggal" id="jarak"
+                    class="w-2/3 p-2 border "value="{{ old('jarak_tempat_tinggal') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="waktu" class="w-2/4 pr-2">Waktu Tempuh Ke-sekolah (Menit)</label>
-                <input type="number" name="waktu_tempuh_sekolah" id="waktu" class="w-2/3 p-2 border "
-                    maxlength="3">
+                <input type="number" name="waktu_tempuh_sekolah" id="waktu"
+                    class="w-2/3 p-2 border "value="{{ old('waktu_tempuh_sekolah') }}">
             </div>
             <div class="flex items-center mb-4">
                 <label for="saudara" class="w-2/4 pr-2">Jumlah Saudara Kandung</label>
-                <input type="number" name="jumlah_saudara_kandung" id="saudara" class="w-2/3 p-2 border "
-                    maxlength="2">
+                <input type="number" name="jumlah_saudara_kandung" id="saudara"
+                    class="w-2/3 p-2 border "value="{{ old('jumlah_saudara_kandung') }}">
             </div>
             <p class="text-lg font-bold mb-4">Pertanyaan Keamanan</p>
             <div class="flex items-center mb-4">
@@ -417,7 +436,7 @@
                     <input type="checkbox" name="keamanan" id="keamanan" class="mr-2" required>
                     <span>Saya menyatakan dengan sesungguhnya bahwa isian data dalam formulir ini adalah benar. Apabila
                         ternyata data tersebut tidak benar / palsu, maka saya bersedia menerima sanksi sesuai ketentuan
-                        yang berlaku di </span>
+                        yang berlaku di SMK Negeri 1 Sebulu</span>
                 </div>
             </div>
 

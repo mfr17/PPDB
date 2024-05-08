@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\StudentAddmissionController;
 use App\Http\Controllers\TempController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+// Auth::routes();
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('/daftar', [StudentAddmissionController::class, 'create'])->name('students.create');
+Route::get('/{id}/cetak-pdf', [StudentAddmissionController::class, 'cetak'])->name('students.cetak')->middleware('auth');
+Route::get('/{id}/download-pdf', [StudentAddmissionController::class, 'download'])->name('siswa.download');
 
 Route::post('/ppdb', [StudentAddmissionController::class, 'store'])->name('students.store');
